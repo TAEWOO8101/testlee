@@ -1,0 +1,726 @@
+<title>MG 건담 일본 한정판 아카이브</title>
+<style>
+  :root{
+    --ink:#14181f;
+    --ink-soft:#4b535f;
+    --paper:#eef1f4;
+    --paper2:#ffffff;
+    --line:rgba(20,24,31,0.12);
+    --line-strong:rgba(20,24,31,0.28);
+    --pb:#b9781a;
+    --pb-bg:#f7ecd6;
+    --gb:#1f7896;
+    --gb-bg:#dcedf2;
+    --ev:#a83a33;
+    --ev-bg:#f5dfdd;
+    --focus:#2f6fce;
+  }
+  :root[data-theme="dark"]{
+    --ink:#e7ebf0;
+    --ink-soft:#a7b0bc;
+    --paper:#0d1117;
+    --paper2:#161b22;
+    --line:rgba(231,235,240,0.14);
+    --line-strong:rgba(231,235,240,0.3);
+    --pb:#f0b94a;
+    --pb-bg:#3a2d10;
+    --gb:#5cc3e8;
+    --gb-bg:#0f2c34;
+    --ev:#e2685f;
+    --ev-bg:#3a1815;
+    --focus:#6ea6ff;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e7ebf0;
+      --ink-soft:#a7b0bc;
+      --paper:#0d1117;
+      --paper2:#161b22;
+      --line:rgba(231,235,240,0.14);
+      --line-strong:rgba(231,235,240,0.3);
+      --pb:#f0b94a;
+      --pb-bg:#3a2d10;
+      --gb:#5cc3e8;
+      --gb-bg:#0f2c34;
+      --ev:#e2685f;
+      --ev-bg:#3a1815;
+      --focus:#6ea6ff;
+    }
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","Apple SD Gothic Neo","Segoe UI",sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  .display{
+    font-family:"Bahnschrift","Arial Narrow",-apple-system,"Malgun Gothic",sans-serif;
+    font-stretch:condensed;
+    font-weight:700;
+    letter-spacing:0.01em;
+  }
+  .mono{
+    font-family:Consolas,"SFMono-Regular",Menlo,monospace;
+    font-variant-numeric:tabular-nums;
+  }
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--focus);outline-offset:2px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:56px 24px 40px;
+    background:
+      repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 44px),
+      repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 44px);
+    border-bottom:1px solid var(--line-strong);
+    overflow:hidden;
+  }
+  .hero-inner{
+    max-width:1120px;
+    margin:0 auto;
+    position:relative;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:2px;
+    background:var(--ev);
+    display:inline-block;
+  }
+  h1.title{
+    font-size:clamp(34px,6vw,64px);
+    line-height:1.02;
+    margin:0 0 6px;
+    text-wrap:balance;
+  }
+  h1.title .sub{
+    display:block;
+    font-size:0.34em;
+    letter-spacing:0.04em;
+    color:var(--ink-soft);
+    font-weight:600;
+    margin-top:10px;
+  }
+  .stamp{
+    position:absolute;
+    top:6px; right:8px;
+    border:3px solid var(--ev);
+    color:var(--ev);
+    padding:8px 14px;
+    font-size:13px;
+    letter-spacing:0.12em;
+    transform:rotate(7deg);
+    border-radius:4px;
+    font-weight:700;
+    text-transform:uppercase;
+    background:color-mix(in srgb, var(--ev) 8%, transparent);
+  }
+  .lede{
+    max-width:66ch;
+    color:var(--ink-soft);
+    font-size:16px;
+    margin:18px 0 26px;
+  }
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .legend-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--paper2);
+    border:1px solid var(--line);
+    padding:8px 12px;
+    border-radius:4px;
+    font-size:13px;
+  }
+  .swatch{width:10px;height:10px;border-radius:2px;flex:none;}
+  .legend-item b{font-weight:700;}
+  .legend-item span{color:var(--ink-soft);}
+
+  /* ---------- STAT STRIP ---------- */
+  .stats{
+    max-width:1120px;
+    margin:26px auto 0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line-strong);
+    border:1px solid var(--line-strong);
+  }
+  .stat{
+    background:var(--paper2);
+    padding:14px 18px;
+  }
+  .stat .num{font-size:26px;}
+  .stat .lbl{font-size:12px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px;}
+  @media (max-width:640px){ .stats{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- TOOLBAR ---------- */
+  .toolbar{
+    position:sticky; top:0; z-index:10;
+    background:color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line-strong);
+    padding:14px 24px;
+  }
+  .toolbar-inner{
+    max-width:1120px;
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+  }
+  .chip{
+    border:1px solid var(--line-strong);
+    background:var(--paper2);
+    color:var(--ink);
+    padding:7px 14px;
+    border-radius:99px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:background .15s, color .15s, border-color .15s;
+    white-space:nowrap;
+  }
+  .chip[aria-pressed="true"]{
+    background:var(--ink);
+    color:var(--paper);
+    border-color:var(--ink);
+  }
+  .chip .n{opacity:0.65;margin-left:4px;}
+  @media (prefers-reduced-motion: reduce){ .chip{transition:none;} }
+
+  .search-wrap{
+    margin-left:auto;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  input[type="search"], select{
+    font:inherit;
+    font-size:13px;
+    padding:8px 12px;
+    border-radius:6px;
+    border:1px solid var(--line-strong);
+    background:var(--paper2);
+    color:var(--ink);
+  }
+  input[type="search"]{min-width:220px;}
+
+  /* ---------- GRID ---------- */
+  main{
+    max-width:1120px;
+    margin:0 auto;
+    padding:22px 24px 60px;
+  }
+  #count-line{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 14px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(268px,1fr));
+    gap:10px;
+  }
+  .card{
+    background:var(--paper2);
+    border:1px solid var(--line);
+    border-left:4px solid var(--cat-color);
+    border-radius:3px;
+    padding:13px 14px 12px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:8px;
+  }
+  .card-code{
+    font-size:11px;
+    color:var(--cat-color);
+    font-weight:700;
+    letter-spacing:0.04em;
+  }
+  .card-badge{
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:2px 7px;
+    border-radius:3px;
+    background:var(--cat-bg);
+    color:var(--cat-color);
+    white-space:nowrap;
+  }
+  .card-name{
+    font-size:15px;
+    font-weight:700;
+    line-height:1.3;
+  }
+  .card-note{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+  .card-series{
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .card-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-top:4px;
+    padding-top:8px;
+    border-top:1px dashed var(--line);
+    font-size:12.5px;
+  }
+  .card-price{font-weight:700;}
+  .empty{
+    padding:60px 20px;
+    text-align:center;
+    color:var(--ink-soft);
+  }
+
+  footer{
+    max-width:1120px;
+    margin:0 auto;
+    padding:20px 24px 60px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    border-top:1px solid var(--line);
+  }
+  footer a{text-decoration:underline;}
+  footer p{max-width:74ch;}
+</style>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="stamp">JAPAN ONLY</div>
+    <div class="eyebrow">BANDAI NAMCO · 1/100 MASTER GRADE</div>
+    <h1 class="title display">MG JAPAN<br>EXCLUSIVE ARCHIVE
+      <span class="sub">일본에서만 발매된 마스터그레이드(MG) 건담 한정판 전수 목록</span>
+    </h1>
+    <p class="lede">
+      반다이남코(BANDAI SPIRITS)가 MG(마스터그레이드) 규격으로 내놓은 제품 중,
+      해외 정식 유통 없이 <b>일본 국내 채널로만</b> 판매된 한정판을 모았습니다.
+      유통 경로에 따라 세 갈래로 나뉩니다 — 예약제로 소량 생산되는
+      <b>프리미엄반다이 한정</b>, 오프라인 매장에서만 구할 수 있는
+      <b>건담베이스 한정</b>, 전시회·이벤트 현장에서만 풀리는 <b>이벤트 한정</b>.
+    </p>
+    <div class="legend">
+      <div class="legend-item"><span class="swatch" style="background:var(--pb)"></span><b>프리미엄반다이 한정</b><span>온라인 예약 생산 (P-BANDAI)</span></div>
+      <div class="legend-item"><span class="swatch" style="background:var(--gb)"></span><b>건담베이스 한정</b><span>THE GUNDAM BASE 매장 판매</span></div>
+      <div class="legend-item"><span class="swatch" style="background:var(--ev)"></span><b>이벤트 한정</b><span>전시·행사 현장 한정 판매</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="stats" id="stats"></div>
+
+<div class="toolbar">
+  <div class="toolbar-inner" id="toolbar">
+    <button class="chip" data-cat="ALL" aria-pressed="true">전체</button>
+    <button class="chip" data-cat="PB" aria-pressed="false">프리미엄반다이 한정</button>
+    <button class="chip" data-cat="GB" aria-pressed="false">건담베이스 한정</button>
+    <button class="chip" data-cat="EV" aria-pressed="false">이벤트 한정</button>
+    <div class="search-wrap">
+      <input type="search" id="search" placeholder="기체명·원작으로 검색" aria-label="검색">
+      <select id="sort" aria-label="정렬">
+        <option value="date-desc">최신 발매순</option>
+        <option value="date-asc">오래된 순</option>
+        <option value="price-desc">가격 높은순</option>
+        <option value="price-asc">가격 낮은순</option>
+        <option value="name-asc">이름순 (가나다)</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<main>
+  <p id="count-line"></p>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden>검색 결과가 없습니다.</div>
+</main>
+
+<footer>
+  <p>
+    데이터는 <a href="https://ganpura.mizukusa.jp.net/tag/mg-all/" target="_blank" rel="noopener">GUNPLA ROOM</a>의
+    프리미엄반다이 한정 / 건담베이스 한정 / 이벤트 한정 MG 목록을 바탕으로 정리했습니다 (2026년 7월 기준, 가격은 세금 포함 정가).
+    일부 대량 생산된 초기 프레바니(001~030, 101~120 구간 등)와 재판 베리에이션은 지면상 생략했으며,
+    프리미엄반다이 한정판은 이후 건담베이스·이벤트 한정으로 재판되는 경우가 있어 완전한 전수 목록은 아닙니다.
+    누락되거나 잘못된 정보가 있다면 언제든 알려주세요.
+  </p>
+</footer>
+
+<script>
+  const DATA = [
+    // ---- 건담베이스 한정 (GB) ----
+    {n:"에일 스트라이크 건담 Ver.RM",d:"2017-08",p:4620,s:"기동전사 건담SEED",c:"GB",note:"클리어 컬러"},
+    {n:"프리덤 건담 Ver.2.0",d:"2017-08",p:4950,s:"기동전사 건담SEED",c:"GB",note:"클리어 컬러"},
+    {n:"RX-78-2 건담 Ver.3.0",d:"2017-08",p:4950,s:"기동전사 건담",c:"GB",note:"클리어 컬러"},
+    {n:"트랜잠 라이저",d:"2017-09",p:7150,s:"기동전사 건담00",c:"GB",note:"클리어 컬러"},
+    {n:"시난주",d:"2017-11",p:8250,s:"기동전사 건담UC",c:"GB",note:"메카니컬 클리어"},
+    {n:"크로스본 건담 X-1 풀크로스",d:"2018-04",p:8250,s:"크로스본 건담",c:"GB",note:"엑스트라 피니시"},
+    {n:"MS 케이지",d:"2019-04",p:2200,s:"디스플레이 액세서리",c:"GB"},
+    {n:"유니콘 건담 퍼펙티빌리티",d:"2019-07",p:13200,s:"기동전사 건담UC",c:"GB"},
+    {n:"RX-78-2 건담 Ver.3.0",d:"2019-11",p:4950,s:"기동전사 건담",c:"GB",note:"건담베이스 컬러"},
+    {n:"V2 어설트 버스터 건담 Ver.Ka",d:"2020-05",p:16500,s:"건담V",c:"GB",note:"티타늄 피니시"},
+    {n:"데스티니 건담",d:"2024-07",p:7150,s:"건담SEED DESTINY",c:"GB",note:"하이네 커스텀"},
+    {n:"RX-78-3 G-3 건담 Ver.3.0",d:"2024-09",p:5280,s:"기동전사 건담",c:"GB"},
+    {n:"건담 엑시아",d:"2024-11",p:4180,s:"기동전사 건담00",c:"GB",note:"클리어 컬러"},
+    {n:"윙 건담 제로 EW Ver.Ka",d:"2025-04",p:6380,s:"신기동전기 건담W",c:"GB",note:"네온 핑크"},
+    {n:"건담 아스트레이 레드프레임",d:"2025-04",p:5280,s:"건담SEED ASTRAY",c:"GB",note:"네온 핑크"},
+    {n:"백식 Ver.2.0",d:"2025-10",p:17600,s:"기동전사 Z건담",c:"GB",note:"메탈릭"},
+    {n:"센고쿠 아스트레이",d:"2025-11",p:6600,s:"건담빌드파이터즈",c:"GB",note:"메탈릭"},
+    {n:"건담 버추",d:"2025-11",p:9460,s:"건담SEED",c:"GB",note:"클리어 컬러"},
+    {n:"짐 스나이퍼 커스텀",d:"2026-02",p:5280,s:"기동전사 Z건담",c:"GB"},
+
+    // ---- 프리미엄반다이 한정 (PB) ----
+    {n:"MS-07B3 구프 커스텀",d:"2009-07",p:3300,s:"기동전사 건담 MS 이글루2",c:"PB",note:"그래비티 프론트 컬러"},
+    {n:"MS-09 돔",d:"2009-07",p:4400,s:"MS 이글루2",c:"PB",note:"그래비티 프론트 컬러"},
+    {n:"MS-06J 자크II",d:"2009-07",p:3850,s:"MS 이글루2",c:"PB",note:"그래비티 프론트 컬러"},
+    {n:"트랜잠 라이저",d:"2011-10",p:7150,s:"기동전사 건담00",c:"PB"},
+    {n:"무샤 건담 Mk-II",d:"2012-01",p:7000,s:"반다이남코 콜라보",c:"PB",note:"도쿠가와 이에야스 Ver."},
+    {n:"MSA-003 네모",d:"2012-04",p:3300,s:"건담UC",c:"PB",note:"유니콘 데저트 컬러"},
+    {n:"MSA-003 네모",d:"2012-04",p:3300,s:"건담UC",c:"PB",note:"유니콘 컬러"},
+    {n:"RX-78-2 건담 Ver.2.0",d:"2012-06",p:4620,s:"기동전사 건담",c:"PB",note:"리얼타입 컬러"},
+    {n:"MS-06S 자크II Ver.2.0",d:"2012-06",p:4180,s:"기동전사 건담",c:"PB",note:"리얼타입 컬러"},
+    {n:"바주카 팩",d:"2012-06",p:1540,s:"기동전사 Z건담",c:"PB"},
+    {n:"MS-06S 블랙 트라이스타즈 자크 Ver.2.0",d:"2012-09",p:3850,s:"건담 MSV-R",c:"PB"},
+    {n:"톨기스II",d:"2013-03",p:4180,s:"신기동전기 건담W",c:"PB"},
+    {n:"MS-06R-1A 유마 라이트닝 커스텀 자크II",d:"2013-04",p:4950,s:"건담 MSV-R",c:"PB"},
+    {n:"MS-06S 조니 라이덴 커스텀 자크II",d:"2013-05",p:4180,s:"건담 MSV-R",c:"PB"},
+    {n:"마라사이",d:"2013-07",p:4620,s:"건담UC",c:"PB",note:"유니콘 컬러"},
+    {n:"MS-06R-1A 아나벨 가토 커스텀 자크II Ver.2.0",d:"2013-08",p:4950,s:"건담 MSV-R",c:"PB"},
+    {n:"건담 Ver.3.0 확장세트",d:"2013-08",p:1650,s:"기동전사 건담",c:"PB"},
+    {n:"건담 AGE-2 노멀",d:"2013-09",p:4620,s:"기동전사 건담AGE",c:"PB",note:"특수작전 컬러"},
+    {n:"건담 AGE-1 2호기",d:"2013-09",p:3850,s:"건담AGE 무명의 전사들",c:"PB"},
+    {n:"기라 도가",d:"2013-10",p:5280,s:"역습의 샤아",c:"PB",note:"레진 슈나이더 커스텀"},
+    {n:"자크 캐논",d:"2013-11",p:4950,s:"건담UC",c:"PB",note:"유니콘 컬러"},
+    {n:"즈고크",d:"2013-11",p:3300,s:"건담UC",c:"PB",note:"유니콘 컬러"},
+    {n:"건담 아스트레이 느와르",d:"2014-01",p:5500,s:"건담SEED DESTINY ASTRAY-B",c:"PB"},
+    {n:"건담 아스트레이 레드프레임",d:"2014-01",p:4950,s:"건담SEED ASTRAY",c:"PB"},
+    {n:"데스티니 임펄스 건담 R",d:"2014-02",p:5720,s:"건담SEED DESTINY ASTRAY R",c:"PB",note:"Regenesis"},
+    {n:"건담 엑시아 리페어II",d:"2014-02",p:4620,s:"기동전사 건담00",c:"PB"},
+    {n:"RX-78-1 프로토타입 건담",d:"2014-04",p:4620,s:"기동전사 건담",c:"PB"},
+    {n:"풀아머 건담",d:"2014-04",p:5500,s:"건담 배틀 오퍼레이션 넥서스",c:"PB",note:"블루 컬러"},
+    {n:"유니콘 건담 2호기 반시 노른",d:"2014-06",p:6600,s:"건담UC",c:"PB"},
+    {n:"MS-06F 도즐 자비 커스텀 자크II",d:"2014-06",p:4950,s:"건담 MSV",c:"PB"},
+    {n:"MS-14C 겔구그 캐논",d:"2014-07",p:5280,s:"건담 MSV",c:"PB",note:"MSV 컬러"},
+    {n:"풀아머 유니콘 건담",d:"2014-08",p:8800,s:"건담UC",c:"PB",note:"레드 컬러"},
+    {n:"S건담 부스터유닛 장착형",d:"2014-08",p:10780,s:"건담 센티넬",c:"PB"},
+    {n:"MS-07B 마 쿠베 전용 그프",d:"2014-08",p:4950,s:"건담 MSV",c:"PB"},
+    {n:"더블오건담 세븐소드/G",d:"2014-09",p:6050,s:"건담00V 전기",c:"PB"},
+    {n:"건담 아스트레이 블루프레임D용",d:"2014-11",p:1540,s:"건담SEED ASTRAY",c:"PB"},
+    {n:"MS-06FS 가르마 자비 전용 자크II",d:"2014-12",p:4180,s:"건담 MSV",c:"PB"},
+    {n:"톨기스III",d:"2015-01",p:4950,s:"신기동전기 건담W",c:"PB"},
+    {n:"MSZ-006-3B 제타건담 3호기B형",d:"2015-02",p:7150,s:"건담 EVOLVE",c:"PB"},
+    {n:"MS-09R 도즐 자비 전용 리크돔",d:"2015-03",p:5500,s:"건담 MSV-R",c:"PB"},
+    {n:"유니콘 건담 2호기 반시 노른",d:"2015-05",p:6600,s:"건담UC",c:"PB",note:"재판"},
+    {n:"MSZ-006P2/3C 제타건담 3호기P2형",d:"2015-06",p:7150,s:"건담 EVOLVE",c:"PB"},
+    {n:"MS-06R-2 갸비 하자드 전용 자크II",d:"2015-06",p:4950,s:"건담 MSV",c:"PB"},
+    {n:"메가 바주카 런처",d:"2015-07",p:3080,s:"건담 MSV-R",c:"PB"},
+    {n:"턴에이건담",d:"2015-07",p:6050,s:"∀건담",c:"PB",note:"월광접 Ver."},
+    {n:"턴에이건담용 월광접 이펙트",d:"2015-07",p:1980,s:"∀건담",c:"PB"},
+    {n:"기라 도가",d:"2015-07",p:6050,s:"건담UC",c:"PB",note:"풀 프론탈 전용기"},
+    {n:"RGC-80 짐 캐논",d:"2015-08",p:4400,s:"건담 MSV",c:"PB"},
+    {n:"FA-78-2 헤비 건담",d:"2015-09",p:4950,s:"건담 MSV",c:"PB"},
+    {n:"알트론 건담 EW",d:"2015-10",p:4950,s:"신기동전기 건담W",c:"PB"},
+    {n:"건담 페니체 리나시타 알바",d:"2015-10",p:5280,s:"건담 빌드파이터즈",c:"PB"},
+    {n:"제스타 캐논",d:"2015-11",p:5500,s:"건담UC",c:"PB"},
+    {n:"양산형 백식改",d:"2015-12",p:6050,s:"기동전사 Z건담",c:"PB"},
+    {n:"건담 어메이징 엑시아",d:"2015-12",p:5500,s:"건담 빌드파이터즈",c:"PB"},
+    {n:"스타 빌드 스트라이크 건담",d:"2016-04",p:6600,s:"건담 빌드파이터즈",c:"PB"},
+    {n:"프리덤 건담 Ver.2.0 확장이펙트",d:"2016-05",p:2200,s:"건담SEED",c:"PB"},
+    {n:"프리덤 건담 Ver.2.0 풀버스트",d:"2016-05",p:11000,s:"기동전사 건담",c:"PB"},
+    {n:"MS-06R-1A 에릭 맨스필드 전용",d:"2016-05",p:4950,s:"건담 MSV",c:"PB"},
+    {n:"기라 도가",d:"2016-06",p:5500,s:"건담UC",c:"PB",note:"유니콘 Ver."},
+    {n:"제타 플러스",d:"2016-06",p:3520,s:"건담UC",c:"PB",note:"유니콘 Ver."},
+    {n:"파워드 짐",d:"2016-07",p:3300,s:"기동전사 건담0083",c:"PB"},
+    {n:"백식改",d:"2016-08",p:11000,s:"기동전사 Z건담",c:"PB"},
+    {n:"임펄스 건담 블랑쉬",d:"2016-09",p:5720,s:"건담SEED ASTRAY",c:"PB"},
+    {n:"건담 헤비암즈改 EW",d:"2016-10",p:5280,s:"신기동전기 건담W",c:"PB"},
+    {n:"퍼펙트 스트라이크 건담",d:"2016-10",p:11000,s:"건담SEED",c:"PB",note:"특수코팅"},
+    {n:"MS-06R-2 자크II",d:"2016-11",p:4950,s:"건담 MSV",c:"PB",note:"로버트 길리엄"},
+    {n:"RMS-179 짐II",d:"2017-01",p:3850,s:"기동전사 Z건담",c:"PB"},
+    {n:"프로토타입 그프",d:"2017-01",p:4950,s:"건담 MSV",c:"PB"},
+    {n:"짐 스나이퍼II",d:"2017-03",p:4180,s:"기동전사 건담0080",c:"PB",note:"화이트 딩고"},
+    {n:"짐 캐논",d:"2017-04",p:4400,s:"건담 MSV",c:"PB",note:"북미사양"},
+    {n:"프로비던스 건담 드라군 이펙트",d:"2017-06",p:2420,s:"건담SEED",c:"PB"},
+    {n:"MS-06R-1A 자크II",d:"2017-06",p:4950,s:"건담 MSV-R",c:"PB",note:"신 마츠나가 커스텀"},
+    {n:"어드밴스드 진크스",d:"2017-07",p:4620,s:"건담00V",c:"PB"},
+    {n:"더블오 잔블로어",d:"2017-07",p:8800,s:"건담00V",c:"PB"},
+    {n:"캐스발 커스텀 건담 Ver.3.0",d:"2017-08",p:4950,s:"기렌의 야망",c:"PB"},
+    {n:"MS-06R-1A 자크II",d:"2017-08",p:4950,s:"건담 MSV",c:"PB",note:"나카가와 마사야"},
+    {n:"풀아머 건담 선더볼트",d:"2017-08",p:7480,s:"건담 선더볼트",c:"PB"},
+    {n:"고기동 자크 사이코자크",d:"2017-09",p:9350,s:"건담 선더볼트",c:"PB"},
+    {n:"건담 TR-1 [헤이즐개]",d:"2017-09",p:4950,s:"ADVANCE OF Z",c:"PB"},
+    {n:"RMS-179 짐II",d:"2017-09",p:4070,s:"건담UC",c:"PB",note:"유니콘 Ver."},
+    {n:"MS-06R-1 자크II",d:"2017-10",p:4950,s:"건담 MSV",c:"PB",note:"블레니프 오구스"},
+    {n:"건담 샌드록改 EW",d:"2017-10",p:5280,s:"신기동전기 건담W",c:"PB"},
+    {n:"짐 커맨드",d:"2017-11",p:3850,s:"기동전사 건담0080",c:"PB",note:"우주전투사양"},
+    {n:"저스티스 건담",d:"2017-11",p:9900,s:"건담SEED",c:"PB",note:"특수코팅"},
+    {n:"어드밴스드 진크스",d:"2017-11",p:4620,s:"건담00V",c:"PB",note:"데보라기"},
+    {n:"고기동 겔구그",d:"2018-01",p:6050,s:"에이스 파일럿 로그",c:"PB",note:"유마 라이트닝"},
+    {n:"윙건담 제로 EW & 드라우자바레크",d:"2018-01",p:11000,s:"신기동전기 건담W",c:"PB"},
+    {n:"프로비던스 건담",d:"2018-01",p:13200,s:"건담SEED",c:"PB",note:"특수코팅"},
+    {n:"RGM-79SC 짐 스나이퍼 커스텀",d:"2018-01",p:4400,s:"에이스 파일럿 로그",c:"PB"},
+    {n:"건담 아스트레이 턴레드",d:"2018-02",p:7700,s:"건담SEED DESTINY",c:"PB"},
+    {n:"건담 TR-1 [헤이즐개]",d:"2018-02",p:4950,s:"ADVANCE OF Z",c:"PB",note:"실전배비 컬러"},
+    {n:"더블오 건담 세븐소드/G",d:"2018-04",p:13200,s:"건담00V",c:"PB",note:"트랜잠모드"},
+    {n:"더블오 쿠안타",d:"2018-04",p:11000,s:"건담00 극장판",c:"PB",note:"트랜잠모드"},
+    {n:"건담 TR-1 [어드밴스드 헤이즐]",d:"2018-05",p:6050,s:"ADVANCE OF Z",c:"PB"},
+    {n:"징크스III",d:"2018-05",p:4730,s:"기동전사 건담00",c:"PB",note:"ARROWS형"},
+    {n:"짐 도미넌스",d:"2018-06",p:4950,s:"건담 외전",c:"PB"},
+    {n:"건담 X 3호기",d:"2018-07",p:4400,s:"기동신세기 건담X",c:"PB"},
+    {n:"잭 캐논",d:"2018-07",p:5500,s:"건담 MSV",c:"PB",note:"이안 전용기"},
+    {n:"TR-1용 실드 부스터 확장세트",d:"2018-07",p:1650,s:"ADVANCE OF Z",c:"PB"},
+    {n:"G파츠 [풀도드]",d:"2018-07",p:2420,s:"ADVANCE OF Z",c:"PB"},
+    {n:"드워즈",d:"2019-04",p:5500,s:"기동전사 건담ZZ",c:"PB"},
+    {n:"샤이롱 건담 EW",d:"2019-05",p:4950,s:"신기동전기 건담W",c:"PB",note:"타우야 장비"},
+    {n:"리-가지 커스텀",d:"2019-05",p:6050,s:"역습의 샤아",c:"PB"},
+    {n:"짐",d:"2019-05",p:4290,s:"기동전사 건담0080",c:"PB",note:"한냉지 사양"},
+    {n:"더블오 쿠안타 풀세이버",d:"2019-07",p:12100,s:"건담00V",c:"PB",note:"특수코팅"},
+    {n:"짐 스나이퍼II",d:"2019-07",p:4180,s:"에이스 파일럿 로그",c:"PB",note:"리도 울프기"},
+    {n:"∀건담/턴X",d:"2019-08",p:12650,s:"∀건담",c:"PB",note:"나노스킨 이미지"},
+    {n:"건담F90",d:"2019-08",p:4400,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"건담F90용 미션팩 E&S타입",d:"2019-08",p:2200,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"TR-1[헤이즐2호기]",d:"2019-09",p:4950,s:"ADVANCE OF Z",c:"PB"},
+    {n:"짐 도미넌스",d:"2019-10",p:6050,s:"블루 디스티니",c:"PB",note:"필립 휴즈기"},
+    {n:"건담F91 Ver.2.0",d:"2019-10",p:4620,s:"크로스본 건담",c:"PB"},
+    {n:"건담 듀나메스",d:"2019-11",p:4950,s:"기동전사 건담00",c:"PB",note:"트랜잠모드"},
+    {n:"드워즈改",d:"2019-11",p:6050,s:"기동전사 건담ZZ",c:"PB"},
+    {n:"건담 헤비암즈 EW",d:"2019-11",p:6050,s:"신기동전기 건담W",c:"PB",note:"이글 장비"},
+    {n:"건담F90용 미션팩 F&M타입",d:"2019-11",p:2200,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"리-가지",d:"2019-12",p:5830,s:"건담UC",c:"PB",note:"유니콘 Ver."},
+    {n:"블래스트 임펄스 건담",d:"2020-01",p:5500,s:"건담SEED DESTINY",c:"PB"},
+    {n:"건담F90용 미션팩 B&K타입",d:"2020-03",p:2200,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"건담 데스사이즈 EW",d:"2020-04",p:4950,s:"신기동전기 건담W",c:"PB",note:"루세트 장비"},
+    {n:"슬래시 자크 팬텀",d:"2020-04",p:4950,s:"건담SEED DESTINY",c:"PB"},
+    {n:"RGM-89D 제간D형",d:"2020-06",p:4620,s:"건담UC MSV",c:"PB"},
+    {n:"건담F90II I타입",d:"2020-07",p:6600,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"건담 아스트레이 레드프레임 플라이트유닛",d:"2020-07",p:7150,s:"건담SEED DESTINY ASTRAY",c:"PB"},
+    {n:"레드프레임 플라이트유닛 확장세트",d:"2020-07",p:2200,s:"건담SEED DESTINY ASTRAY",c:"PB"},
+    {n:"퀴베레이 앙벨리엘",d:"2020-08",p:5940,s:"건담 빌드다이버즈",c:"PB"},
+    {n:"RMS-179 짐II",d:"2020-09",p:3850,s:"기동전사 Z건담",c:"PB",note:"에우고 컬러"},
+    {n:"건담F90용 미션팩 O&U타입",d:"2020-09",p:2200,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"건담 바르바토스 확장파츠세트",d:"2020-10",p:3410,s:"건담 철혈의 오펀스",c:"PB"},
+    {n:"건담 샌드록EW",d:"2020-10",p:6380,s:"신기동전기 건담W",c:"PB",note:"아르마딜로 장비"},
+    {n:"에일스트라이크건담Ver.RM용 스트라이커팩",d:"2020-11",p:2420,s:"건담SEED",c:"PB"},
+    {n:"테스타먼트 건담",d:"2020-11",p:6270,s:"건담SEED DESTINY ASTRAY",c:"PB"},
+    {n:"건담 스톰브링어 F.A./짐 터뷸런스",d:"2020-11",p:6270,s:"건담 빌드다이버즈",c:"PB"},
+    {n:"블레이즈 자크팬텀/블레이즈 자크워리어",d:"2020-12",p:4290,s:"건담SEED DESTINY",c:"PB"},
+    {n:"건담TR-1[헤이즐 아우스라]",d:"2020-12",p:8800,s:"ADVANCE OF Z",c:"PB"},
+    {n:"백식 라이즈카인",d:"2021-02",p:13200,s:"건담 빌드다이버즈",c:"PB"},
+    {n:"건담F91 Ver.2.0",d:"2021-07",p:9680,s:"건담F91",c:"PB",note:"티타늄 피니시"},
+    {n:"톨기스F EW",d:"2021-10",p:6600,s:"신기동전기 건담W",c:"PB"},
+    {n:"건담AGE-1 풀그란사",d:"2023-01",p:7370,s:"기동전사 건담AGE",c:"PB",note:"디자이너스 컬러"},
+    {n:"건담F90용 미션팩 전용 행거 2세트",d:"2023-02",p:1650,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"건담F90용 미션팩 C&T타입",d:"2023-02",p:2420,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"스타크 제간",d:"2023-02",p:7480,s:"건담UC",c:"PB"},
+    {n:"거너/슬래시/블레이즈 위자드 세트",d:"2023-04",p:3850,s:"건담SEED",c:"PB"},
+    {n:"건담 아스트레이 아웃프레임D",d:"2023-04",p:6380,s:"건담SEED DESTINY ASTRAY",c:"PB"},
+    {n:"건담F90용 미션팩 P타입",d:"2023-06",p:2420,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"조니 라이든 전용 겔구그",d:"2023-07",p:6380,s:"ACE PILOT LOG",c:"PB"},
+    {n:"켐프퍼 슈베어",d:"2023-08",p:6270,s:"건담 빌드다이버즈",c:"PB"},
+    {n:"이클립스 건담 2호기",d:"2023-09",p:6600,s:"건담SEED ECLIPSE",c:"PB"},
+    {n:"건담F90용 미션팩 J&Q타입",d:"2023-11",p:2420,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"건담 에피온 EW",d:"2023-12",p:7480,s:"신기동전기 건담W",c:"PB"},
+    {n:"건담F90용 미션팩 A&L타입",d:"2024-02",p:2750,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"모빌진",d:"2024-04",p:5390,s:"건담SEED MSV",c:"PB",note:"미겔 아이만 전용기"},
+    {n:"건담F90 N타입",d:"2024-06",p:6600,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"건담 스톰브링어 P.F.",d:"2024-08",p:7590,s:"건담 빌드다이버즈",c:"PB"},
+    {n:"F90III Y클러스터 건담",d:"2024-10",p:6600,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"양산형 리코 전용 자크",d:"2024-12",p:4620,s:"양산형 리코",c:"PB"},
+    {n:"건담 아스트레아+프로토GN트윈브로드블레이드",d:"2025-01",p:7150,s:"건담00P",c:"PB"},
+    {n:"F80 건레이드",d:"2025-06",p:5280,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"Ex-S건담/S건담",d:"2025-07",p:16500,s:"건담 센티넬",c:"PB",note:"태스크포스α Ver."},
+    {n:"블레이즈 자크팬텀",d:"2025-08",p:5390,s:"건담SEED DESTINY",c:"PB",note:"디아카 엘스만 전용기"},
+    {n:"건담 아스트레이 미라주프레임 세컨드이슈",d:"2025-11",p:6600,s:"건담SEED VS ASTRAY",c:"PB"},
+    {n:"MGEX 스트라이크 프리덤 건담",d:"2026-01",p:18700,s:"건담SEED DESTINY",c:"PB",note:"메카니컬 클리어 (MGEX 규격)"},
+    {n:"건담 바르바토스 루푸스용 확장파츠세트",d:"2026-02",p:2970,s:"건담 철혈의 오펀스",c:"PB"},
+    {n:"F90III Y클러스터 건담용 미션팩X타입",d:"2026-03",p:3850,s:"F90 A to Z PROJECT",c:"PB"},
+    {n:"건담 샌드록EW",d:"2026-03",p:6820,s:"신기동전기 건담W",c:"PB",note:"아르마디로 리자드 장비"},
+
+    // ---- 이벤트 한정 (EV) ----
+    {n:"캬스바루 전용 건담",d:"1999-10",p:4950,s:"기동전사 건담",c:"EV",note:"메탈릭 코팅"},
+    {n:"MS-14A 가토 전용 겔구그",d:"1999-10",p:6050,s:"건담0083",c:"EV",note:"코팅 버전"},
+    {n:"릭돔",d:"2000-07",p:6600,s:"기동전사 건담",c:"EV",note:"클리어 메킹"},
+    {n:"샤아 전용 릭돔",d:"2000-09",p:6600,s:"기동전사 건담",c:"EV",note:"코팅 버전"},
+    {n:"건담NT-1",d:"2000-09",p:5500,s:"건담0080",c:"EV",note:"메탈클리어"},
+    {n:"에일스트라이크건담",d:"2004-10",p:4191,s:"건담SEED",c:"EV",note:"디액티브모드"},
+    {n:"윙건담제로",d:"2005-08",p:8381,s:"건담W",c:"EV",note:"펄미러 코팅"},
+    {n:"기얀",d:"2006-08",p:7334,s:"기동전사 건담",c:"EV",note:"엑스트라 피니시"},
+    {n:"RX-78-2건담",d:"2006-08",p:6809,s:"기동전사 건담",c:"EV",note:"Ver.ONE YEAR WAR"},
+    {n:"프리덤건담",d:"2006-08",p:3981,s:"건담SEED",c:"EV",note:"클리어 컬러"},
+    {n:"스트라이크프리덤건담",d:"2007-04",p:5029,s:"건담SEED DESTINY",c:"EV",note:"클리어 컬러"},
+    {n:"MS-06J 량산형자크Ver.2.0",d:"2008-04",p:4191,s:"기동전사 건담",c:"EV"},
+    {n:"RX-78-3 G-3건담",d:"2008-08",p:3353,s:"기동전사 건담",c:"EV",note:"Ver.ONE YEAR WAR"},
+    {n:"데스티니건담",d:"2009-03",p:5028,s:"건담SEED DESTINY",c:"EV",note:"클리어 컬러"},
+    {n:"RX-78-2건담Ver.2.0",d:"2009-03",p:4400,s:"기동전사 건담",c:"EV",note:"클리어 컬러"},
+    {n:"MS-06S 샤아전용자크Ver.2.0",d:"2009-08",p:6809,s:"기동전사 건담",c:"EV"},
+    {n:"C3 MS-06J 량산자크Ver.2.0",d:"2009-08",p:6500,s:"기동전사 건담",c:"EV"},
+    {n:"임펄스건담",d:"2009-08",p:6600,s:"건담SEED DESTINY",c:"EV",note:"풀컬러 메킹"},
+    {n:"자크IIVer.2.0",d:"2009-12",p:5280,s:"기동전사 건담",c:"EV",note:"아바오아쿠 방위대"},
+    {n:"하이네전용 데스티니건담",d:"2010-08",p:5028,s:"건담SEED DESTINY",c:"EV"},
+    {n:"샤아전용자크Ver.2.0",d:"2010-08",p:3666,s:"기동전사 건담",c:"EV",note:"클리어 컬러"},
+    {n:"Z건담Ver.2.0",d:"2010-08",p:9428,s:"기동전사 Z건담",c:"EV",note:"엑스트라 피니시"},
+    {n:"블리츠건담",d:"2012-08",p:4191,s:"건담SEED",c:"EV",note:"미라주 클로이드"},
+    {n:"건담Ver.2.0",d:"2013-03",p:4730,s:"기동전사 건담",c:"EV",note:"리얼타입 컬러"},
+    {n:"풀아머유니콘건담",d:"2013-11",p:8381,s:"건담UC",c:"EV",note:"메카니컬 클리어"},
+    {n:"RX-78-2건담Ver.3.0",d:"2013-12",p:4715,s:"기동전사 건담",c:"EV",note:"G.F.T 사양"},
+    {n:"건담Ver.3.0",d:"2014-07",p:4992,s:"기동전사 건담",c:"EV",note:"메카니컬 클리어"},
+    {n:"샤아전용자크Ver.2.0",d:"2014-07",p:3871,s:"기동전사 건담",c:"EV",note:"메카니컬 클리어"},
+    {n:"건담아스트레이레드프레임",d:"2015-07",p:7638,s:"건담SEED ASTRAY",c:"EV",note:"메킹"},
+    {n:"V2건담Ver.Ka",d:"2016-11",p:5500,s:"건담V",c:"EV",note:"메카니컬 클리어/금메킹"},
+    {n:"톨기스EW",d:"2017-08",p:8800,s:"신기동전기 건담W",c:"EV",note:"스페셜 코팅"},
+    {n:"건담피닉스리나시타",d:"2017-08",p:5280,s:"건담빌드파이터즈",c:"EV",note:"클리어 컬러"},
+    {n:"유니콘건담",d:"2017-09",p:5500,s:"건담UC",c:"EV",note:"메탈릭 글로스"},
+    {n:"건담아스트레이골드프레임",d:"2017-10",p:8800,s:"건담SEED",c:"EV",note:"특수코팅"},
+    {n:"저스티스건담",d:"2017-11",p:5280,s:"건담SEED",c:"EV",note:"클리어 컬러"},
+    {n:"더블오건담세븐소드/G",d:"2017-11",p:6050,s:"기동전사 건담00",c:"EV",note:"클리어 컬러"},
+    {n:"백식Ver.2.0",d:"2017-11",p:5280,s:"기동전사 Z건담",c:"EV",note:"메카니컬 클리어"},
+    {n:"풀아머건담Ver.Ka",d:"2017-11",p:7700,s:"건담 선더볼트",c:"EV",note:"하프 메카니컬"},
+    {n:"짐스나이퍼II",d:"2018-05",p:4180,s:"건담0080",c:"EV",note:"클리어 컬러"},
+    {n:"톨기스II",d:"2018-06",p:8800,s:"신기동전기 건담W",c:"EV",note:"특수코팅"},
+    {n:"건담NT-1ver.2.0",d:"2019-08",p:6380,s:"건담0080",c:"EV",note:"클리어 컬러"},
+    {n:"제스타캐논",d:"2019-12",p:5500,s:"건담UC",c:"EV",note:"클리어 컬러"},
+    {n:"톨기스III",d:"2020-01",p:10120,s:"건담W Endless Waltz",c:"EV",note:"특수코팅"},
+    {n:"건담데스사이즈헬EW",d:"2021-01",p:10450,s:"건담W Endless Waltz",c:"EV",note:"특수코팅"},
+    {n:"건담바르바토스",d:"2021-03",p:9900,s:"건담 철혈의 오펀스",c:"EV",note:"티타늄 피니시"},
+    {n:"더블오자인라이저",d:"2021-05",p:8800,s:"건담00V",c:"EV",note:"클리어 컬러"},
+    {n:"거너자쿠워리어",d:"2021-08",p:4730,s:"건담SEED DESTINY",c:"EV",note:"클리어 컬러"},
+    {n:"건담바르바토스",d:"2021-11",p:9900,s:"건담 철혈의 오펀스",c:"EV",note:"아이언블러드 코팅"},
+    {n:"RX-78-2건담Ver.3.0",d:"2021-12",p:5280,s:"기동전사 건담",c:"EV",note:"네온 그린"},
+    {n:"에일스트라이크건담Ver.RM",d:"2021-12",p:4950,s:"건담SEED",c:"EV",note:"네온 핑크"},
+    {n:"건담엑시아",d:"2022-06",p:4510,s:"기동전사 건담00",c:"EV",note:"네온 퍼플"},
+    {n:"건담바르바토스",d:"2022-07",p:5280,s:"건담 철혈의 오펀스",c:"EV",note:"네온 블루"},
+    {n:"이지스건담",d:"2024-03",p:5610,s:"건담SEED",c:"EV",note:"클리어 컬러"},
+  ];
+
+  const CAT_LABEL = {PB:"프리미엄반다이 한정", GB:"건담베이스 한정", EV:"이벤트 한정"};
+
+  // assign sequential per-category code
+  const counters = {};
+  DATA.forEach(item=>{
+    counters[item.c] = (counters[item.c]||0)+1;
+    item.code = item.c + "-" + String(counters[item.c]).padStart(3,"0");
+  });
+
+  const grid = document.getElementById("grid");
+  const empty = document.getElementById("empty");
+  const countLine = document.getElementById("count-line");
+  const searchInput = document.getElementById("search");
+  const sortSelect = document.getElementById("sort");
+  const toolbar = document.getElementById("toolbar");
+  let activeCat = "ALL";
+
+  function renderStats(){
+    const total = DATA.length;
+    const years = DATA.map(d=>parseInt(d.d.slice(0,4),10));
+    const minY = Math.min(...years), maxY = Math.max(...years);
+    const byCat = {PB:0,GB:0,EV:0};
+    DATA.forEach(d=>byCat[d.c]++);
+    const stats = [
+      {num:total, lbl:"총 수록 기체"},
+      {num:byCat.PB, lbl:"프리미엄반다이"},
+      {num:byCat.GB, lbl:"건담베이스"},
+      {num:minY+"–"+maxY, lbl:"발매 연도 범위"},
+    ];
+    document.getElementById("stats").innerHTML = stats.map(s=>
+      `<div class="stat"><div class="num display">${s.num}</div><div class="lbl">${s.lbl}</div></div>`
+    ).join("");
+  }
+
+  function fmtDate(d){
+    const [y,m] = d.split("-");
+    return `${y}년 ${parseInt(m,10)}월`;
+  }
+
+  function render(){
+    const q = searchInput.value.trim().toLowerCase();
+    const sortMode = sortSelect.value;
+
+    let items = DATA.filter(it=>{
+      if(activeCat !== "ALL" && it.c !== activeCat) return false;
+      if(q && !(it.n.toLowerCase().includes(q) || it.s.toLowerCase().includes(q))) return false;
+      return true;
+    });
+
+    items.sort((a,b)=>{
+      switch(sortMode){
+        case "date-asc": return a.d.localeCompare(b.d);
+        case "price-desc": return b.p - a.p;
+        case "price-asc": return a.p - b.p;
+        case "name-asc": return a.n.localeCompare(b.n, "ko");
+        default: return b.d.localeCompare(a.d);
+      }
+    });
+
+    countLine.textContent = `${items.length.toLocaleString()}개 표시 중 (전체 ${DATA.length.toLocaleString()}개)`;
+    empty.hidden = items.length !== 0;
+
+    grid.innerHTML = items.map(it=>`
+      <article class="card" style="--cat-color:var(--${it.c.toLowerCase()});--cat-bg:var(--${it.c.toLowerCase()}-bg)">
+        <div class="card-top">
+          <span class="card-code mono">${it.code}</span>
+          <span class="card-badge">${CAT_LABEL[it.c]}</span>
+        </div>
+        <div class="card-name">${it.n}</div>
+        ${it.note ? `<div class="card-note">${it.note}</div>` : ""}
+        <div class="card-series">${it.s}</div>
+        <div class="card-bottom">
+          <span class="mono">${fmtDate(it.d)}</span>
+          <span class="card-price mono">¥${it.p.toLocaleString()}</span>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  toolbar.addEventListener("click", e=>{
+    const btn = e.target.closest(".chip");
+    if(!btn) return;
+    activeCat = btn.dataset.cat;
+    toolbar.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", c===btn ? "true":"false"));
+    render();
+  });
+  searchInput.addEventListener("input", render);
+  sortSelect.addEventListener("change", render);
+
+  // chip counts
+  (function initChipCounts(){
+    const byCat = {PB:0,GB:0,EV:0};
+    DATA.forEach(d=>byCat[d.c]++);
+    toolbar.querySelectorAll(".chip").forEach(c=>{
+      const cat = c.dataset.cat;
+      const n = cat==="ALL" ? DATA.length : byCat[cat];
+      c.innerHTML = c.textContent + ` <span class="n">${n}</span>`;
+    });
+  })();
+
+  renderStats();
+  render();
+</script>
